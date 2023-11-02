@@ -1,0 +1,14 @@
+[
+  {
+    "name": "John Doe",
+    "wishes": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere expedita voluptatum labore sunt architecto laboriosam."
+  },
+  {
+    "name": "Jane Smith",
+    "wishes": "Lorem ipsum dolor sit amet."
+  },
+  {
+    "name": "Bob Johnson",
+    "wishes": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis, iusto!"
+  }
+]
