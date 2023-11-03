@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 import jsonData from "../utils/data.json";
 
@@ -11,8 +11,22 @@ import wave from "../assets/img/wave.svg";
 import wave2 from "../assets/img/wave-2.svg";
 import wave3 from "../assets/img/wave-5.svg";
 import wave4 from "../assets/img/wave-4.svg";
+import music from "../assets/music/Main.mp3";
 
 const RightWelcomingSection = () => {
+  const audioRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const playAudio = () => {
+    audioRef.current.play();
+    setIsPlaying(true);
+  };
+
+  const pauseAudio = () => {
+    audioRef.current.pause();
+    setIsPlaying(false);
+  };
+
   const images = [`${photo1}`, `${man}`, `${woman}`];
   const [slide, setSlide] = useState(0);
 
@@ -65,6 +79,8 @@ const RightWelcomingSection = () => {
       .then((jsonData) => setData(jsonData))
       .catch((err) => console.error("Error fetching data:", err));
 
+    playAudio();
+
     return () => {
       clearInterval(interval);
     };
@@ -73,6 +89,18 @@ const RightWelcomingSection = () => {
   return (
     <>
       <div className="w-2/5 md:h-screen overflow-y-scroll">
+        {/* music setting */}
+        <audio id="myAudio" loop ref={audioRef}>
+          <source src={music} type="audio/mpeg" />
+        </audio>
+        {/* <button onClick={playAudio} type="button">
+          Play
+        </button>
+        <button onClick={pauseAudio} type="button">
+          Pause
+        </button> */}
+
+        {/* Section 1 */}
         <section className="min-h-screen">
           <div className="relative">
             <img src={photo1} alt="" className="w-full h-screen absolute inset-0 object-cover opacity-80" />
@@ -99,6 +127,7 @@ const RightWelcomingSection = () => {
           </div>
         </section>
 
+        {/* Section 2 */}
         <section className="min-h-screen bg-rose-50 py-12">
           <div className=" w-5/6 bg-slate-400 mx-auto rounded-3xl">
             <div className="w-2/3 m-auto pt-12">
@@ -111,20 +140,24 @@ const RightWelcomingSection = () => {
           </div>
         </section>
 
+        {/* Section 3 */}
         <section className="min-h-screen py-12">
-          <div className="text-center px-8">
-            <p className="text-slate-700 pb-4">
+          <div className="relative">
+            <div className="absolute h-80 top-52 w-full -z-10 bg-slate-500"></div>
+          </div>
+          <div className="text-center ">
+            <p className="text-slate-700 pb-4 px-8">
               Together with joyful hearts and the grace of God, we joyfully announce the upcoming marriage of:
             </p>
-            <div className="border-b-4">
+            <div className="">
               <img src={man} className="h-60 mx-auto rounded-3xl" alt="" />
               <p className="text-xl font-semibold">Name</p>
-              <p>The son of Mr. Parents Man and Mrs. Parents Lady</p>
+              <p className="px-8">The son of Mr. Parents Man and Mrs. Parents Lady</p>
               <div className="my-2 flex items-center justify-center">
                 <a
                   href="https://instagram.com"
                   target="_blank"
-                  className="mr-3 flex h-11 w-11 items-center justify-center bg-slate-400 rounded-full text-slate-200 hover:border-primary hover:bg-primary hover:text-slate-300 hover:bg-slate-500"
+                  className="mr-3 flex h-11 w-11 items-center justify-center bg-slate-400 rounded-full text-slate-200  hover:text-slate-300 hover:bg-slate-500"
                 >
                   <svg
                     className="fill-current"
@@ -140,7 +173,7 @@ const RightWelcomingSection = () => {
                 <a
                   href="https://x.com"
                   target="_blank"
-                  className="mr-3 flex h-11 w-11 items-center justify-center bg-slate-400 rounded-full text-slate-200 hover:border-primary hover:bg-primary hover:text-slate-300 hover:bg-slate-500"
+                  className="mr-3 flex h-11 w-11 items-center justify-center bg-slate-400 rounded-full text-slate-200  hover:text-slate-300 hover:bg-slate-500"
                 >
                   <svg
                     className="fill-current"
@@ -155,15 +188,16 @@ const RightWelcomingSection = () => {
                 </a>
               </div>
             </div>
+
             <div className="pt-4">
               <img src={woman} className="h-60 mx-auto rounded-3xl" alt="" />
               <p className="text-xl font-semibold">Name</p>
-              <p>The daughter of Mr. Parents Man and Mrs. Parents Lady</p>
+              <p className="px-8">The daughter of Mr. Parents Man and Mrs. Parents Lady</p>
               <div className="my-2 flex items-center justify-center">
                 <a
                   href="https://instagram.com"
                   target="_blank"
-                  className="mr-3 flex h-11 w-11 items-center justify-center bg-slate-400 rounded-full text-slate-200 hover:border-primary hover:bg-primary hover:text-slate-300 hover:bg-slate-500"
+                  className="mr-3 flex h-11 w-11 items-center justify-center bg-slate-400 rounded-full text-slate-200  hover:text-slate-300 hover:bg-slate-500"
                 >
                   <svg
                     className="fill-current"
@@ -179,7 +213,7 @@ const RightWelcomingSection = () => {
                 <a
                   href="https://x.com"
                   target="_blank"
-                  className="mr-3 flex h-11 w-11 items-center justify-center bg-slate-400 rounded-full text-slate-200 hover:border-primary hover:bg-primary hover:text-slate-300 hover:bg-slate-500"
+                  className="mr-3 flex h-11 w-11 items-center justify-center bg-slate-400 rounded-full text-slate-200  hover:text-slate-300 hover:bg-slate-500"
                 >
                   <svg
                     className="fill-current"
@@ -197,6 +231,7 @@ const RightWelcomingSection = () => {
           </div>
         </section>
 
+        {/* Section 4 */}
         <section className="min-h-screen py-12">
           <div className="mx-auto relative h-screen w-4/5 ">
             <div className="w-full h-1/2 absolute inset-0 bg-cover bg-center z-10">
@@ -211,6 +246,7 @@ const RightWelcomingSection = () => {
           </div>
         </section>
 
+        {/* Section 5 */}
         <section className="min-h-screen bg-rose-50 py-12 mt-12">
           <div className=" w-5/6 bg-slate-400 h-[510px] mx-auto rounded-3xl">
             <h3 className="text-center text-3xl px-8 pt-8 text-rose-50">Wedding Celebration</h3>
@@ -241,7 +277,6 @@ const RightWelcomingSection = () => {
                 <img src={photo3} alt="" className="mx-auto rounded-3xl opacity-80 brightness-75 w-3/4 object-cover" />
               </div>
               <div className="absolute items-center justify-center inset-0 pt-16">
-                <p className="text-center text-rose-50 text-2xl mb-2">💍</p>
                 <p className="text-center text-rose-50 text-2xl mb-2">Holy Matrimony</p>
                 <p className="text-center text-rose-50 text-xl font-light mb-2">09.00 WIB</p>
                 <p className="text-center text-rose-50 text-xl font-light mb-2">Friday, 22 October 2021</p>
@@ -250,6 +285,7 @@ const RightWelcomingSection = () => {
           </div>
         </section>
 
+        {/* Section 6 */}
         <section className="min-h-screen">
           <div className="relative">
             {/* Gambar sebagai latar belakang */}
@@ -305,6 +341,7 @@ const RightWelcomingSection = () => {
           </div>
         </section>
 
+        {/* Section 7 */}
         <section className=" py-6">
           <div className="max-w-screen-lg mx-auto p-4">
             <div className="relative">
@@ -323,6 +360,7 @@ const RightWelcomingSection = () => {
           </div>
         </section>
 
+        {/* Section 8 */}
         <section className="min-h-screen">
           <div className="relative">
             <img
