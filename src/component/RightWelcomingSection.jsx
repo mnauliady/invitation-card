@@ -7,26 +7,86 @@ import photo2 from "../assets/img/photo-7.jpg";
 import photo3 from "../assets/img/photo-1.jpg";
 import man from "../assets/img/man.jpg";
 import woman from "../assets/img/woman.jpg";
-import wave from "../assets/img/wave.svg";
 import wave2 from "../assets/img/wave-2.svg";
 import wave3 from "../assets/img/wave-5.svg";
-import wave4 from "../assets/img/wave-4.svg";
 import music from "../assets/music/Main.mp3";
+import mandiri from "../assets/img/bank-mandiri.png";
+import bca from "../assets/img/bca.png";
+import play from "../assets/img/music.svg";
+import pause from "../assets/img/pause.svg";
 
 const RightWelcomingSection = () => {
+  // audio
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isHidden, setIsHidden] = useState();
 
   const playAudio = () => {
     audioRef.current.play();
     setIsPlaying(true);
+    setIsHidden(false);
   };
 
   const pauseAudio = () => {
     audioRef.current.pause();
     setIsPlaying(false);
+    setIsHidden(true);
   };
 
+  // modal our love story (section 4)
+  const [showModal1, setShowModal1] = useState(false);
+  const openModal1 = () => {
+    setShowModal1(true);
+  };
+
+  const closeModal1 = () => {
+    setShowModal1(false);
+    //
+  };
+
+  // modal bank transfer (section 6)
+  const [showModal2, setShowModal2] = useState(false);
+  const openModal2 = () => {
+    setShowModal2(true);
+  };
+
+  const closeModal2 = () => {
+    setShowModal2(false);
+  };
+
+  // modal bank transfer (section 6)
+  const [showModal3, setShowModal3] = useState(false);
+  const openModal3 = () => {
+    setShowModal3(true);
+  };
+
+  const closeModal3 = () => {
+    setShowModal3(false);
+  };
+
+  // Copy to clipboard
+  const mandiriRef = useRef(null);
+
+  const copyMandiri = () => {
+    const mandiri = mandiriRef.current.textContent;
+    navigator.clipboard.writeText(mandiri);
+  };
+
+  const bcaRef = useRef(null);
+
+  const copyBca = () => {
+    const bca = bcaRef.current.textContent;
+    navigator.clipboard.writeText(bca);
+  };
+
+  const addressRef = useRef(null);
+
+  const copyAddress = () => {
+    const address = addressRef.current.textContent;
+    navigator.clipboard.writeText(address);
+  };
+
+  // carousel (section 7)
   const images = [`${photo1}`, `${man}`, `${woman}`];
   const [slide, setSlide] = useState(0);
 
@@ -38,6 +98,7 @@ const RightWelcomingSection = () => {
     setSlide((prevSlide) => (prevSlide === 0 ? images.length - 1 : prevSlide - 1));
   };
 
+  // Prayer & Wishes (section 8)
   const [data, setData] = useState([]);
   const [name, setName] = useState("");
   const [wishes, setWishes] = useState("");
@@ -49,26 +110,9 @@ const RightWelcomingSection = () => {
     setData(newData);
     setName("");
     setWishes("");
-    // console.log(newData);
-    // const fileData = JSON.stringify(newData);
-    // const blob = new Blob([fileData], { type: "text/plain" });
-    // const url = URL.createObjectURL(blob);
-    // const link = document.createElement("a");
-    // link.download = `data.json`;
-    // link.href = url;
-    // link.click();
-    // fetch("http://127.0.0.1:5173/src/utils/data.json", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(newData),
-    // }).then(() => {
-    // setName("");
-    // setWishes("");
-    // });
   };
 
+  // useEffect
   useEffect(() => {
     const interval = setInterval(() => {
       nextSlide();
@@ -88,26 +132,163 @@ const RightWelcomingSection = () => {
 
   return (
     <>
-      <div className="w-2/5 md:h-screen overflow-y-scroll">
+      {/* Modal 1*/}
+      {showModal1 && (
+        <>
+          <div className="fixed bg-black bg-opacity-50 w-full z-30">
+            <div className="relative">
+              <div className="flex">
+                <div className="hidden lg:block lg:w-3/5"></div>
+                <div className="min-h-screen w-full sm:w-3/4 md:w-3/5 mx-auto lg:w-2/5 bg-rose-50 py-12 z-50">
+                  <div className=" w-5/6 bg-slate-400 mx-auto rounded-3xl">
+                    <div className="border-b-4 pb-2 border-slate-100">
+                      <h3 className="font-semibold px-8 pt-4 text-rose-50">2018</h3>
+                      <p className="px-8 text-rose-50">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat iste accusamus adipisci
+                        similique in minus consectetur aspernatur esse,
+                      </p>
+                    </div>
+                    <div className="border-b-4 pb-2 border-slate-100">
+                      <h3 className="font-semibold px-8 pt-2 text-rose-50">2019</h3>
+                      <p className="px-8 text-rose-50">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat iste accusamus adipisci
+                        similique in minus consectetur aspernatur esse,
+                      </p>
+                    </div>
+                    <div className="pb-4">
+                      <h3 className="font-semibold px-8 pt-2 text-rose-50">2020</h3>
+                      <p className="px-8 text-rose-50">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat iste accusamus adipisci
+                        similique in minus consectetur aspernatur esse,
+                      </p>
+                    </div>
+                  </div>
+                  <div className=" pt-4 text-center rounded-3xl mb-4">
+                    <button
+                      onClick={closeModal1}
+                      className="bg-rose-400 px-4 py-1.5 mt-2 mb-4 rounded-md text-rose-50 hover:bg-rose-500 hover:text-rose-100"
+                    >
+                      Back
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+
+      {/* Modal 2*/}
+      {showModal2 && (
+        <>
+          <div className="fixed bg-black bg-opacity-50 w-full z-30">
+            <div className="relative">
+              <div className="flex">
+                <div className="hidden lg:block lg:w-3/5"></div>
+                <div className="min-h-screen w-full sm:w-3/4 md:w-3/5 mx-auto lg:w-2/5 bg-rose-50 pt-4 z-50">
+                  <div className="flex justify-between px-8 border-b-2">
+                    <div>
+                      <p className="text-orange-900 mb-2 text-lg font-merienda">Bank Transfer</p>
+                    </div>
+                    <div>
+                      <button
+                        onClick={closeModal2}
+                        className="bg-transparent px-2 py-1 mb-2 text-lg rounded-md text-orange-900 hover:bg-rose-200 "
+                      >
+                        X
+                      </button>
+                    </div>
+                  </div>
+                  <div className="px-8 text-center pt-4">
+                    <p>
+                      For beloved one who may want to show your sincere love with sending gift, please kindly tap the
+                      button down below:
+                    </p>
+                  </div>
+                  <div className="px-8 text-center pt-8">
+                    <img src={mandiri} className="w-32 mx-auto" alt="" />
+                    <p ref={mandiriRef}>010101010101</p>
+                    <p>Groom & Bride</p>
+                    <button
+                      onClick={copyMandiri}
+                      className="bg-slate-400 text-white px-2 py-0.5 hover:bg-slate-500 rounded-md"
+                    >
+                      Copy
+                    </button>
+                  </div>
+                  <div className="px-8 text-center pt-8">
+                    <img src={bca} className="w-32 mx-auto" alt="" />
+                    <p ref={bcaRef}>020202020202</p>
+                    <p>Groom & Bride</p>
+                    <button
+                      onClick={copyBca}
+                      className="bg-slate-400 text-white px-2 py-0.5 hover:bg-slate-500 rounded-md"
+                    >
+                      Copy
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+
+      {/* Modal 3*/}
+      {showModal3 && (
+        <>
+          <div className="fixed bg-black bg-opacity-50 w-full z-30">
+            <div className="relative">
+              <div className="flex">
+                <div className="hidden lg:block lg:w-3/5"></div>
+                <div className="min-h-screen w-full sm:w-3/4 md:w-3/5 mx-auto lg:w-2/5 bg-rose-50 pt-4 z-50">
+                  <div className="flex justify-between px-8 border-b-2">
+                    <div>
+                      <p className="text-orange-900 mb-2 text-lg font-merienda">Bank Transfer</p>
+                    </div>
+                    <div>
+                      <button
+                        onClick={closeModal3}
+                        className="bg-transparent px-2 py-1 mb-2 text-lg rounded-md text-orange-900 hover:bg-rose-200 "
+                      >
+                        X
+                      </button>
+                    </div>
+                  </div>
+                  <div className="px-8 text-center pt-4">
+                    <p>
+                      For beloved one who may want to show your sincere love with sending gift, please kindly send to
+                      this address below:
+                    </p>
+                  </div>
+                  <div className="px-8 text-center pt-8">
+                    <p ref={addressRef}>
+                      Groom & Bride <br /> Jl. Jalan No. 123, Kota
+                    </p>
+                    <button
+                      onClick={copyAddress}
+                      className="bg-slate-400 text-white px-2 py-0.5 hover:bg-slate-500 rounded-md"
+                    >
+                      Copy
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+
+      <div className="w-full sm:w-3/4 md:w-3/5 mx-auto lg:w-2/5 h-screen lg:overflow-y-scroll">
         {/* music setting */}
         <audio id="myAudio" loop ref={audioRef}>
           <source src={music} type="audio/mpeg" />
         </audio>
-        {/* <button onClick={playAudio} type="button">
-          Play
-        </button>
-        <button onClick={pauseAudio} type="button">
-          Pause
-        </button> */}
 
         {/* Section 1 */}
         <section className="min-h-screen">
           <div className="relative">
             <img src={photo1} alt="" className="w-full h-screen absolute inset-0 object-cover opacity-80" />
-            <div className="absolute inset-0 pt-16 items-center justify-center">
-              <p className="text-xl font-thin text-rose-50 mb-4 text-center">Weeding Announcement of</p>
-              <p className="text-4xl font-light text-rose-100 mb-4 text-center">Dani & Dina</p>
-            </div>
           </div>
           <div className="relative min-h-screen">
             <img src={wave2} alt="" className="h-[350px] object-cover absolute bottom-0 opacity-90" />
@@ -115,9 +296,9 @@ const RightWelcomingSection = () => {
             <img src={wave3} alt="" className=" h-80 object-cover absolute bottom-0 opacity-60" />
             <img src={wave2} alt="" className=" h-96 object-cover absolute bottom-0 opacity-80" />
             <div className="absolute bottom-4 px-8">
-              <p className="text-xl font-bold text-orange-900 mb-2 text-center">Dear Mr/Mrs/Ms,</p>
-              <p className="text-xl font-bold text-orange-900 mb-2 text-center">Family & Friends</p>
-              <p className="text-sm font-light text-orange-900 mb-2 text-center">
+              <p className="text-xl font-bold text-orange-900 mb-1 text-center font-merienda">Dear Mr/Mrs/Ms,</p>
+              <p className="text-xl font-bold text-orange-900 mb-2 text-center font-merienda">Family & Friends</p>
+              <p className="text-sm font-semibold text-orange-800 mb-2 text-center">
                 We are pleased to announce our upcoming wedding to the family and friends. Our apologize to our loved
                 ones who we wished we could have invited. Considering the pandemic restriction, we are unable to invite
                 you in person. Please know that your presence will be sincerely missed and we hope that you will be able
@@ -133,7 +314,7 @@ const RightWelcomingSection = () => {
             <div className="w-2/3 m-auto pt-12">
               <img src={photo2} alt="" className="rounded-t-full rounded-b-3xl opacity-90" />
             </div>
-            <p className="text-center px-8 pt-8 text-rose-50">
+            <p className="text-center text-sm font-semibold px-8 pt-8 text-rose-50">
               "And of all things We created two mates [i.e., counterparts]; perhaps you will remember."
             </p>
             <p className="text-center pt-4 pb-8 text-rose-100 font-semibold">(Az-Zariyat 51:49)</p>
@@ -143,16 +324,16 @@ const RightWelcomingSection = () => {
         {/* Section 3 */}
         <section className="min-h-screen py-12">
           <div className="relative">
-            <div className="absolute h-80 top-52 w-full -z-10 bg-slate-500"></div>
+            <div className="absolute h-80 top-52 w-full -z-10 bg-slate-300"></div>
           </div>
           <div className="text-center ">
-            <p className="text-slate-700 pb-4 px-8">
+            <p className="text-slate-700 pb-4 px-8 font-semibold text-sm">
               Together with joyful hearts and the grace of God, we joyfully announce the upcoming marriage of:
             </p>
             <div className="">
-              <img src={man} className="h-60 mx-auto rounded-3xl" alt="" />
-              <p className="text-xl font-semibold">Name</p>
-              <p className="px-8">The son of Mr. Parents Man and Mrs. Parents Lady</p>
+              <img src={man} className="h-60 mx-auto rounded-3xl mb-2" alt="" />
+              <p className="text-xl font-semibold font-merienda text-slate-800">Name</p>
+              <p className="px-8 text-slate-700 font-semibold">The son of Mr. Parents Man and Mrs. Parents Lady</p>
               <div className="my-2 flex items-center justify-center">
                 <a
                   href="https://instagram.com"
@@ -190,9 +371,9 @@ const RightWelcomingSection = () => {
             </div>
 
             <div className="pt-4">
-              <img src={woman} className="h-60 mx-auto rounded-3xl" alt="" />
-              <p className="text-xl font-semibold">Name</p>
-              <p className="px-8">The daughter of Mr. Parents Man and Mrs. Parents Lady</p>
+              <img src={woman} className="h-60 mx-auto rounded-3xl mb-2" alt="" />
+              <p className="text-xl font-semibold font-merienda text-slate-800">Name</p>
+              <p className="px-8 text-slate-700 font-semibold">The daughter of Mr. Parents Man and Mrs. Parents Lady</p>
               <div className="my-2 flex items-center justify-center">
                 <a
                   href="https://instagram.com"
@@ -232,14 +413,22 @@ const RightWelcomingSection = () => {
         </section>
 
         {/* Section 4 */}
-        <section className="min-h-screen py-12">
+        <section className="h-min py-12">
           <div className="mx-auto relative h-screen w-4/5 ">
             <div className="w-full h-1/2 absolute inset-0 bg-cover bg-center z-10">
               <img src={photo2} alt="" className="rounded-3xl mx-auto" />
             </div>
-            <div className="absolute -bottom-20 left-8 w-5/6 bg-rose-100 pt-20 text-center rounded-3xl mb-4">
-              <p>Read and follow our love of live journey as a couple here:</p>
-              <button className="bg-rose-400 px-2 py-1.5 mt-2 mb-4 rounded-md text-rose-50 hover:bg-rose-500 hover:text-rose-100">
+            {/* <div className="absolute -bottom-16 xl:-bottom-20 left-8 md:left-10 w-5/6 bg-rose-100 pt-20 text-center rounded-3xl mb-4"> */}
+          </div>
+          <div className="relative lg:w-72 w-80  mx-auto">
+            <div className="absolute text-center -bottom-8 md:-bottom-2 lg:bottom-16 xl:-bottom-16 pt-8 lg:pt-10 lg:px-4 inset-x-0 bg-rose-100 rounded-3xl">
+              <p className="text-orange-800 font-semibold text-sm text-center">
+                Read and follow our love of live journey as a couple here:
+              </p>
+              <button
+                onClick={openModal1}
+                className="bg-rose-400 px-2 py-1 mt-2 mb-4 rounded-md text-sm font-semibold text-rose-50 hover:bg-rose-500 hover:text-rose-100"
+              >
                 Our Love Story
               </button>
             </div>
@@ -249,37 +438,39 @@ const RightWelcomingSection = () => {
         {/* Section 5 */}
         <section className="min-h-screen bg-rose-50 py-12 mt-12">
           <div className=" w-5/6 bg-slate-400 h-[510px] mx-auto rounded-3xl">
-            <h3 className="text-center text-3xl px-8 pt-8 text-rose-50">Wedding Celebration</h3>
-            <p className="text-center px-8 pt-2 text-rose-50">will be held in:</p>
+            <h3 className="text-center text-3xl px-8 pt-8 text-rose-50 font-merienda font-semibold">
+              Wedding Celebration
+            </h3>
+            <p className="text-center px-8 pt-2 text-rose-50 font-semibold">will be held in:</p>
             <div className="flex flex-row w-full text-center px-16">
               <div className="w-1/4  mx-2 animate-pulse">
-                <h3 className="text-3xl pt-8 text-rose-50 ">0</h3>
-                <h3 className="text-xl text-rose-50">days</h3>
+                <h3 className="text-3xl pt-8 text-rose-50 font-merienda">0</h3>
+                <h3 className="text-lg text-rose-50">days</h3>
               </div>
               <p className="text-6xl text-rose-50">.</p>
               <div className="w-1/4 mx-2 animate-pulse">
-                <h3 className="text-center text-3xl pt-8 text-rose-50">0</h3>
-                <h3 className="text-xl text-rose-50">hours</h3>
+                <h3 className="text-center text-3xl pt-8 text-rose-50 font-merienda">0</h3>
+                <h3 className="text-lg text-rose-50">hours</h3>
               </div>
               <p className="text-6xl text-rose-50">.</p>
               <div className="w-1/4  mx-2 animate-pulse">
-                <h3 className="text-center text-3xl pt-8 text-rose-50">0</h3>
-                <h3 className="text-xl text-rose-50">mins</h3>
+                <h3 className="text-center text-3xl pt-8 text-rose-50 font-merienda">0</h3>
+                <h3 className="text-lg text-rose-50">mins</h3>
               </div>
               <p className="text-6xl text-rose-50">.</p>
               <div className="w-1/4 mx-2 animate-pulse">
-                <h3 className="text-center text-3xl  pt-8 text-rose-50">0</h3>
-                <h3 className="text-xl text-rose-50">secs</h3>
+                <h3 className="text-center text-3xl  pt-8 text-rose-50 font-merienda">0</h3>
+                <h3 className="text-lg text-rose-50">secs</h3>
               </div>
             </div>
             <div className="w-full py-8 relative">
               <div className="absolute">
                 <img src={photo3} alt="" className="mx-auto rounded-3xl opacity-80 brightness-75 w-3/4 object-cover" />
               </div>
-              <div className="absolute items-center justify-center inset-0 pt-16">
-                <p className="text-center text-rose-50 text-2xl mb-2">Holy Matrimony</p>
-                <p className="text-center text-rose-50 text-xl font-light mb-2">09.00 WIB</p>
-                <p className="text-center text-rose-50 text-xl font-light mb-2">Friday, 22 October 2021</p>
+              <div className="absolute inset-0 pt-20 md:pt-24 lg:pt-16 xl:pt-20">
+                <p className="text-center text-rose-50 text-2xl font-semibold mb-2 font-merienda">Holy Matrimony</p>
+                <p className="text-center text-rose-50 textlg font-semibold mb-2">09.00 WIB</p>
+                <p className="text-center text-rose-50 text-lg font-semibold mb-2">Friday, 22 October 2021</p>
               </div>
             </div>
           </div>
@@ -288,14 +479,15 @@ const RightWelcomingSection = () => {
         {/* Section 6 */}
         <section className="min-h-screen">
           <div className="relative">
-            {/* Gambar sebagai latar belakang */}
-            <img src={photo1} alt="" className="w-full h-screen absolute inset-0 object-cover opacity-80" />
+            <img
+              src={photo1}
+              alt=""
+              className="w-full h-screen absolute inset-0 object-cover opacity-80 brightness-75"
+            />
 
-            {/* Teks di tengah gambar */}
             <div className="absolute inset-0 pt-8 items-center justify-center">
-              {/* <p className="text-white text-2xl font-bold ">Tulisan di Tengah</p> */}
-              <p className="text-4xl font-thin text-rose-50 mb-2 text-center">Life Wedding</p>
-              <p className="text-2xl font-light text-rose-100 mb-2 text-center">Dani & Dina</p>
+              <p className="text-4xl text-rose-50 mb-2 text-center font-merienda font-semibold">Life Wedding</p>
+              <p className="text-xl font-semibold text-rose-100 mb-2 text-center">Nailal & Via</p>
               <div className="mx-auto w-5/6">
                 <div className="px-2 py-2 bg-rose-100 rounded-2xl">
                   <iframe
@@ -312,28 +504,34 @@ const RightWelcomingSection = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <button className="px-2 py-1 rounded-full opacity-80 text-rose-700 mb-2 bg-rose-100 animate-bounce hover:bg-rose-600 hover:text-rose-50">
+                  <button className="px-2 py-1 rounded-full opacity-80 text-rose-700 mb-2 bg-rose-100 animate-bounce hover:bg-rose-600 hover:text-rose-50 font-semibold text-sm">
                     Open Via Youtube
                   </button>
                 </a>
               </div>
-              <p className="text-2xl font-light text-rose-100 mb-2 text-center">Wedding Gift</p>
-              <p className="font-light px-8 text-rose-100 mb-2 text-center">
+              <p className="text-2xl font-semibold text-rose-100 mb-2 text-center font-merienda">Wedding Gift</p>
+              <p className="font-semibold text-sm px-8 text-rose-100 mb-2 text-center">
                 For beloved ones who may want to show your sincere love by sending a gift, please kindly tap the button
                 below:
               </p>
               <div className="text-center mt-4">
-                <button className="px-2 py-1 rounded-full opacity-80 text-rose-700 mb-2 bg-rose-100 hover:bg-rose-600 hover:text-rose-50">
+                <button
+                  onClick={openModal2}
+                  className="px-2 py-1 rounded-full opacity-80 text-rose-700 mb-2 bg-rose-100 hover:bg-rose-600 hover:text-rose-50 font-semibold text-sm"
+                >
                   Bank Transfer
                 </button>
               </div>
               <div className="text-center mt-2">
-                <button className="px-2 py-1 rounded-full opacity-80 text-rose-700 mb-2 bg-rose-100 hover:bg-rose-600 hover:text-rose-50">
+                <button
+                  onClick={openModal3}
+                  className="px-2 py-1 rounded-full opacity-80 text-rose-700 mb-2 bg-rose-100 hover:bg-rose-600 hover:text-rose-50 font-semibold text-sm"
+                >
                   Send Gift
                 </button>
               </div>
               <div className="text-center mt-2">
-                <button className="px-2 py-1 rounded-full opacity-80 text-rose-700 mb-2 bg-rose-100  hover:bg-rose-600 hover:text-rose-50 animate-bounce">
+                <button className="px-2 py-1 rounded-full opacity-80 text-rose-700 mb-2 bg-rose-100  hover:bg-rose-600 hover:text-rose-50 animate-bounce font-semibold text-sm">
                   Confirmation
                 </button>
               </div>
@@ -361,17 +559,17 @@ const RightWelcomingSection = () => {
         </section>
 
         {/* Section 8 */}
-        <section className="min-h-screen">
+        <section className="min-h-screen ">
           <div className="relative">
             <img
               src={photo2}
               alt=""
-              className="w-full h-screen absolute inset-0 object-cover opacity-60 brightness-75"
+              className="w-full h-[130vh] -z-20 absolute inset-0 object-cover opacity-60 brightness-75"
             />
 
             <div className="absolute inset-0 pt-8 items-center justify-center">
-              <p className="text-4xl font-thin text-slate-600 mb-2 text-center">Prayers & Wishes</p>
-              <p className="text-base font-light px-8 text-slate-600 mb-2 text-center">
+              <p className="text-4xl font-semibold text-slate-600 mb-2 text-center font-merienda">Prayers & Wishes</p>
+              <p className="text-sm font-semibold px-8 text-slate-600 mb-2 text-center">
                 Please leave your sincere prayers and wishes to us and our families:
               </p>
               <div className="mx-auto w-full px-10 mb-8">
@@ -405,27 +603,53 @@ const RightWelcomingSection = () => {
 
               <div className="mx-auto w-5/6 h-80 px-2 pb-2 overflow-scroll">
                 {data.map((item, index) => (
-                  <div className="bg-rose-100 py-1 pl-2 rounded-b-xl rounded-tr-xl mb-2">
-                    <p className="mb-1 text-slate-600 font-semibold" key={index}>
-                      {item.name}
-                    </p>
-                    <p className="text-slate-900 ">{item.wishes}</p>
+                  <div className="bg-rose-100 py-1 pl-2 rounded-b-xl rounded-tr-xl mb-2" key={index}>
+                    <p className="mb-0.5 text-orange-900 font-semibold">{item.name}</p>
+                    <p className="text-orange-800 font-semibold text-sm">{item.wishes}</p>
                   </div>
                 ))}
               </div>
-
-              <div className="bg-slate-300 mt-2 pt-2">
-                <p className="text-sm font-base px-8 text-slate-600 mb-2 text-center">
-                  It will be a joy for us if you are still willing to give your blessing from afar. Please know that you
-                  are in our thoughts and will be in our hearts, even though we are deeply sorry, we can't invite you to
-                  the ceremony due to the pandemic restriction. Thank you for all the words, prayers, and attention
-                  given.
-                </p>
-                <p className="text-4xl font-thin text-slate-600 pb-8 text-center">Nailal & Via</p>
-              </div>
+            </div>
+          </div>
+          <div className="relative h-[130vh] -z-10">
+            <img src={wave2} alt="" className="h-72 object-cover absolute bottom-0 opacity-90" />
+            <img src={wave3} alt="" className=" h-56 object-cover absolute bottom-0 opacity-80" />
+            <img src={wave3} alt="" className=" h-52 object-cover absolute bottom-0 opacity-60" />
+            <img src={wave2} alt="" className=" h-60 object-cover absolute bottom-0 opacity-80" />
+            <div className="absolute bottom-4 px-8">
+              <p className="text-sm font-semibold font-sm text-orange-900 mb-2 text-center">
+                It will be a joy for us if you are still willing to give your blessing from afar. Please know that you
+                are in our thoughts and will be in our hearts, even though we are deeply sorry, we can't invite you to
+                the ceremony due to the pandemic restriction. Thank you for all the words, prayers, and attention given.
+              </p>
+              <p className="text-xl font-semibold text-orange-900 mb-2 text-center font-merienda">Nailal & Via</p>
             </div>
           </div>
         </section>
+
+        {/* Section 10 / Footer */}
+        <section className="">
+          <div className="bg-slate-600">
+            <p className="text-base text-slate-400 pt-2 font-semibold text-center ">
+              Created with Love by Muhammad Nur Auliady
+            </p>
+            <p className="text-sm font-semibold px-8 text-slate-400 mb-2 py-2 text-center">
+              © 2023 All Rights Reserved
+            </p>
+          </div>
+        </section>
+      </div>
+
+      <div className="fixed bottom-4 left-4 z-[9999]">
+        {isHidden ? (
+          <button onClick={playAudio} className="bg-white pt-2 bg-opacity-40 hover:bg-opacity-60 rounded-full">
+            <img src={pause} alt="" className="h-8 w-10" />
+          </button>
+        ) : (
+          <button onClick={pauseAudio} className="bg-white pt-2 bg-opacity-40 hover:bg-opacity-60 rounded-full">
+            <img src={play} alt="" className="h-8 w-10" />
+          </button>
+        )}
       </div>
     </>
   );
